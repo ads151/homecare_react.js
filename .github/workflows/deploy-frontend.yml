@@ -1,0 +1,47 @@
+# Publishes the Next.js website to the "deploy-frontend" branch.
+# Hostinger (Node.js App) deploys that branch and runs npm install + build.
+name: Deploy frontend
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "frontend/**"
+      - ".github/workflows/deploy-frontend.yml"
+      - ".github/scripts/**"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: deploy-frontend
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Check that the website builds
+        working-directory: frontend
+        env:
+          BACKEND_URL: http://127.0.0.1:9
+          API_SECRET: build-check
+          NEXT_TELEMETRY_DISABLED: "1"
+        run: |
+          npm ci --no-audit --no-fund
+          npm run build
+
+      - name: Prepare files for the server
+        run: |
+          mkdir -p dist
+          rsync -a frontend/ dist/ --exclude node_modules --exclude .next --exclude '.env.local'
+
+      - name: Publish to deploy-frontend branch
+        run: bash .github/scripts/publish-branch.sh "$GITHUB_WORKSPACE/dist" deploy-frontend

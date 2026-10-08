@@ -1,0 +1,521 @@
+{
+    "pages": [
+        {
+            "slug": "home",
+            "title": "Home",
+            "template": "home",
+            "content": {
+                "hero_image": "images/pages/hero.jpg",
+                "hero_image_mobile": "images/pages/hero-mobile.jpg",
+                "hero_badge": "Trusted Home Healthcare in East Delhi",
+                "hero_title": "Trained Nurses & Caretakers [at Your Home] in East Delhi",
+                "hero_text": "Home nursing, ICU setup, elder care, patient care, mother & baby care and physiotherapy — by verified, experienced staff. 12-hour and 24-hour shifts available.",
+                "hero_points": [
+                    "Police-verified & trained staff",
+                    "Free replacement if not satisfied",
+                    "Day, night & 24-hr live-in shifts",
+                    "Same-day staff in most areas"
+                ],
+                "hero_call_text": "Call {phone}",
+                "hero_trust_line": "Trusted by families across East Delhi & NCR",
+                "hero_form_show": true,
+                "hero_form_heading": "Get a Free Call Back",
+                "hero_form_text": "Our care manager will call you in [10 minutes]",
+                "section1_show": true,
+                "section1_items": [
+                    {
+                        "value": "24×7",
+                        "label": "Care & Emergency Support"
+                    },
+                    {
+                        "value": "100%",
+                        "label": "Verified Staff"
+                    },
+                    {
+                        "value": "4 Hrs",
+                        "label": "Staff at Your Home"
+                    },
+                    {
+                        "value": "6+",
+                        "label": "Home Care Services"
+                    }
+                ],
+                "section2_show": true,
+                "section2_small": "Our Services",
+                "section2_heading": "Complete [Healthcare at Home]",
+                "section2_text": "Choose the care you need. Every service comes with a trained professional, regular updates to the family and a dedicated care manager.",
+                "section2_filter": false,
+                "section2_limit": 0,
+                "section2_button_text": "",
+                "section2_button_link": "home-care-services",
+                "section3_show": true,
+                "section3_small": "How It Works",
+                "section3_heading": "Care at Your Home in [4 Simple Steps]",
+                "section3_text": "",
+                "section3_items": [
+                    {
+                        "icon": "📞",
+                        "title": "Call or Fill the Form",
+                        "text": "Tell us about the patient and the care needed."
+                    },
+                    {
+                        "icon": "🩺",
+                        "title": "Free Assessment",
+                        "text": "Our care manager understands the medical needs."
+                    },
+                    {
+                        "icon": "👩‍⚕️",
+                        "title": "Choose Your Staff",
+                        "text": "We share verified staff profiles that match your need."
+                    },
+                    {
+                        "icon": "🏠",
+                        "title": "Care Starts at Home",
+                        "text": "Staff reaches your home — often the same day."
+                    }
+                ],
+                "section4_show": true,
+                "section4_image": "images/pages/why.jpg",
+                "section4_badge_big": "24×7",
+                "section4_badge_text": "Care manager support for every family",
+                "section4_small": "Why Choose Home Care",
+                "section4_heading": "Care You Can Trust, [Like Family]",
+                "section4_text": "We know how stressful it is when a loved one needs care. That is why every staff member is verified, trained and supervised — so you can be at peace.",
+                "section4_items": [
+                    {
+                        "icon": "🛡️",
+                        "title": "Police-Verified Staff",
+                        "text": "Background & ID checked before joining."
+                    },
+                    {
+                        "icon": "🎓",
+                        "title": "Trained & Experienced",
+                        "text": "Qualified GNM / ANM nurses and trained attendants."
+                    },
+                    {
+                        "icon": "🔄",
+                        "title": "Free Replacement",
+                        "text": "Not happy? We replace the staff at no cost."
+                    },
+                    {
+                        "icon": "👨‍⚕️",
+                        "title": "Care Manager Support",
+                        "text": "Regular follow-up calls & family updates."
+                    },
+                    {
+                        "icon": "💬",
+                        "title": "Clear Pricing",
+                        "text": "Price shared on call. No hidden charges."
+                    },
+                    {
+                        "icon": "⏱️",
+                        "title": "Quick Deployment",
+                        "text": "Same-day staff in most areas."
+                    }
+                ],
+                "section4_button_text": "Book a Free Assessment",
+                "section4_button_link": "popup",
+                "section5_show": true,
+                "section5_heading": "Need a nurse or caretaker today?",
+                "section5_text": "Speak to our care manager now — free consultation, no obligation.",
+                "section6_show": true,
+                "section6_small": "Areas We Serve",
+                "section6_heading": "Home Care Services [Near You]",
+                "section6_text": "Based in Krishna Nagar, East Delhi — serving all of East Delhi and nearby NCR.",
+                "section6_areas": [
+                    "Krishna Nagar",
+                    "Laxmi Nagar",
+                    "Preet Vihar",
+                    "Mayur Vihar",
+                    "Shahdara",
+                    "Vivek Vihar",
+                    "Gandhi Nagar",
+                    "Patparganj",
+                    "Dilshad Garden",
+                    "Anand Vihar",
+                    "Noida",
+                    "Ghaziabad"
+                ],
+                "section7_show": true,
+                "section7_small": "Testimonials",
+                "section7_heading": "What [Families] Say About Us",
+                "section7_text": "",
+                "section7_items": [
+                    {
+                        "name": "Rohit Sharma",
+                        "area": "Laxmi Nagar",
+                        "text": "After my father's surgery we needed a nurse urgently. Home Care sent a trained nurse the same evening. Very caring and professional."
+                    },
+                    {
+                        "name": "Priya Gupta",
+                        "area": "Preet Vihar",
+                        "text": "The ICU setup at home was done in a few hours. The nurse handled the monitor, oxygen and medicines very well. Highly recommended."
+                    },
+                    {
+                        "name": "Neha Kapoor",
+                        "area": "Mayur Vihar",
+                        "text": "Our Japa maid was wonderful with the baby and with me after delivery. The care manager kept checking on us regularly."
+                    }
+                ],
+                "section8_show": true,
+                "section8_small": "FAQ",
+                "section8_heading": "Frequently Asked [Questions]",
+                "section8_text": "",
+                "section8_items": [
+                    {
+                        "question": "How fast can you send a nurse to my home?",
+                        "answer": "In most areas of East Delhi and nearby NCR we can send trained staff within 4 hours, often the same day."
+                    },
+                    {
+                        "question": "Are your nurses and attendants verified?",
+                        "answer": "Yes. Every staff member is police-verified, ID-checked and trained before being placed with a family."
+                    },
+                    {
+                        "question": "What if I am not happy with the staff?",
+                        "answer": "Just call us — we will replace the staff member free of cost."
+                    },
+                    {
+                        "question": "Do you provide 24-hour live-in care?",
+                        "answer": "Yes. We offer 12-hour day, 12-hour night and 24-hour live-in shifts for all services."
+                    },
+                    {
+                        "question": "Can you arrange ICU equipment at home?",
+                        "answer": "Yes. We arrange oxygen, monitors, BiPAP, ventilator, hospital bed and other equipment along with an ICU-trained nurse."
+                    },
+                    {
+                        "question": "How much does home care cost?",
+                        "answer": "The cost depends on the service, shift and patient condition. Call us or fill the form — our care manager will share the exact price on call."
+                    }
+                ],
+                "section9_show": true,
+                "section9_small": "Book Home Care",
+                "section9_heading": "Talk to Our Care Manager — [It's Free]",
+                "section9_text": "Share a few details and we will call you back within 10 minutes with the right staff and price.",
+                "section9_form_heading": "Request a Call Back",
+                "section9_form_text": "Free consultation · No obligation"
+            },
+            "seo_title": "Home Nursing & Patient Care Services at Home in East Delhi | Home Care",
+            "seo_description": "Trained nurses, ICU at home, elder care, patient care, mother & baby care and physiotherapy at home in East Delhi & NCR. Verified staff, 24×7. Call {phone}."
+        },
+        {
+            "slug": "about",
+            "title": "About Us",
+            "template": "about",
+            "content": {
+                "page_name": "About Us",
+                "hero_title": "About Home Care",
+                "hero_text": "Compassionate, professional healthcare — in the comfort of your home.",
+                "hero_image": "images/pages/about-hero.jpg",
+                "hero_image_mobile": "",
+                "section1_show": true,
+                "section1_image": "images/pages/about.jpg",
+                "section1_small": "Who We Are",
+                "section1_heading": "Caring for Your Family [Like Our Own]",
+                "section1_text": "Home Care is a home healthcare service based in Krishna Nagar, East Delhi. We provide trained nurses, patient care attendants, elder care, mother & baby care, ICU setup at home and physiotherapy.\n\nOur aim is simple — give every patient hospital-quality care at home, with the love and comfort of family around them.",
+                "section1_items": [
+                    "Police-verified, trained & experienced staff",
+                    "Dedicated care manager for every family",
+                    "Free staff replacement if you are not satisfied",
+                    "Available 24 hours, 7 days a week"
+                ],
+                "section1_button_text": "Talk to Our Care Manager",
+                "section1_button_link": "popup",
+                "section2_show": true,
+                "section2_items": [
+                    {
+                        "value": "24×7",
+                        "label": "Care & Support"
+                    },
+                    {
+                        "value": "100%",
+                        "label": "Verified Staff"
+                    },
+                    {
+                        "value": "4 Hrs",
+                        "label": "Staff at Your Home"
+                    },
+                    {
+                        "value": "6+",
+                        "label": "Home Care Services"
+                    }
+                ],
+                "section3_show": true,
+                "section3_small": "Our Promise",
+                "section3_heading": "Our Mission, Vision & [Values]",
+                "section3_text": "",
+                "section3_items": [
+                    {
+                        "icon": "🎯",
+                        "title": "Our Mission",
+                        "text": "To make quality, affordable healthcare available at home for every family in Delhi NCR."
+                    },
+                    {
+                        "icon": "👁️",
+                        "title": "Our Vision",
+                        "text": "To be the most trusted name for home nursing and patient care in East Delhi."
+                    },
+                    {
+                        "icon": "❤️",
+                        "title": "Our Values",
+                        "text": "Compassion, honesty, safety and respect for every patient and family."
+                    }
+                ],
+                "section4_show": true,
+                "section4_small": "What We Do",
+                "section4_heading": "Popular [Home Care Services]",
+                "section4_text": "Click a service to get a free call back.",
+                "section4_items": [
+                    {
+                        "image": "images/services/home-nursing.jpg",
+                        "title": "Home Nursing",
+                        "text": "Qualified nurses at home",
+                        "link": "popup"
+                    },
+                    {
+                        "image": "images/services/icu-at-home.jpg",
+                        "title": "ICU at Home",
+                        "text": "ICU nurse + equipment",
+                        "link": "popup"
+                    },
+                    {
+                        "image": "images/services/elder-care.jpg",
+                        "title": "Elder Care",
+                        "text": "Care for senior citizens",
+                        "link": "popup"
+                    },
+                    {
+                        "image": "images/services/physiotherapy.jpg",
+                        "title": "Physiotherapy",
+                        "text": "Rehab at your home",
+                        "link": "popup"
+                    }
+                ],
+                "cta_show": true,
+                "cta_heading": "",
+                "cta_text": ""
+            },
+            "seo_title": "About Us | Home Care – Trusted Home Nursing in East Delhi",
+            "seo_description": "Home Care provides trained nurses, caretakers, ICU at home and physiotherapy in East Delhi & NCR. Learn about our verified staff and care process."
+        },
+        {
+            "slug": "contact",
+            "title": "Contact Us",
+            "template": "contact",
+            "content": {
+                "page_name": "Contact Us",
+                "hero_title": "Contact Us",
+                "hero_text": "Call, WhatsApp or send a message — we reply quickly, 24×7.",
+                "hero_image": "images/pages/contact-hero.jpg",
+                "hero_image_mobile": "",
+                "section1_small": "Get in Touch",
+                "section1_heading": "We Are Here to [Help You]",
+                "section1_text": "",
+                "form_heading": "Send Us a Message",
+                "form_text": "Fill the form and our care manager will call you back shortly.",
+                "map_show": true,
+                "map_embed": "https://www.google.com/maps?q=G-113%2F4%2C%20Jagatpuri%2C%20Krishna%20Nagar%2C%20Delhi%20110051&output=embed",
+                "cta_show": true,
+                "cta_heading": "",
+                "cta_text": ""
+            },
+            "seo_title": "Contact Us | Home Care – Krishna Nagar, East Delhi",
+            "seo_description": "Contact Home Care for home nursing, ICU at home, elder care and physiotherapy in East Delhi. Call or WhatsApp {phone}. Open 24×7."
+        },
+        {
+            "slug": "home-care-services",
+            "title": "Our Services",
+            "template": "listing",
+            "content": {
+                "page_name": "Our Services",
+                "hero_title": "Home Care Services",
+                "hero_text": "Trained nurses and caretakers at your home — 12-hour, 24-hour and live-in shifts.",
+                "hero_image": "images/pages/services-hero.jpg",
+                "hero_image_mobile": "",
+                "section1_small": "What We Offer",
+                "section1_heading": "Choose the [Care You Need]",
+                "section1_text": "Click \"Book Now\" on any service and our care manager will call you back with details and price.",
+                "filter_show": true,
+                "section2_show": true,
+                "section2_heading": "Need something different?",
+                "section2_text": "Tell us the patient's condition and we will create a custom care plan for your family.",
+                "section2_button_text": "Request Custom Care Plan",
+                "section2_button_link": "popup",
+                "section2_item": "Custom Care Plan",
+                "cta_show": true,
+                "cta_heading": "",
+                "cta_text": ""
+            },
+            "seo_title": "Home Care Services in East Delhi – Nursing, ICU, Elder Care | Home Care",
+            "seo_description": "Home nursing, ICU at home, elder care, patient care, mother & baby care and physiotherapy in East Delhi & NCR. Verified staff. Call {phone} for a free consultation."
+        },
+        {
+            "slug": "privacy-policy",
+            "title": "Privacy Policy",
+            "template": "legal",
+            "content": {
+                "page_name": "Privacy Policy",
+                "hero_title": "Privacy Policy",
+                "hero_text": "",
+                "hero_image": "images/pages/page-hero.jpg",
+                "hero_image_mobile": "",
+                "last_updated": "6 October 2026",
+                "cta_show": true,
+                "body": "<p>This Privacy Policy explains how <b>Home Care</b> (\"we\", \"us\") collects, uses and protects the information you share with us through this website, phone calls and WhatsApp.</p>\n\n<h2>Information We Collect</h2>\n<ul>\n<li>Your name, mobile number, email address and area / locality.</li>\n<li>Details about the care you need, such as the service, patient condition and preferred start date.</li>\n<li>Basic technical data such as browser type, pages visited and IP address, collected by our website and analytics tools.</li>\n</ul>\n\n<h2>How We Use Your Information</h2>\n<ul>\n<li>To call you back and understand your care requirements.</li>\n<li>To arrange suitable nurses, caretakers or therapists for the patient.</li>\n<li>To send you service updates and respond to your questions.</li>\n<li>To improve our website and services, including measuring our online advertising.</li>\n</ul>\n\n<h2>Sharing of Information</h2>\n<p>We do not sell or rent your personal information. We share only the necessary details with the staff member assigned to your family, and with service providers who help us run this website (such as hosting and email), under confidentiality.</p>\n\n<h2>Cookies & Advertising</h2>\n<p>Our website may use cookies and tools such as Google Analytics, Google Ads and Meta Pixel to understand visits and show relevant ads. You can disable cookies in your browser settings.</p>\n\n<h2>Data Security</h2>\n<p>We take reasonable steps to keep your information safe. Enquiries are stored securely and are accessible only to our team.</p>\n\n<h2>Your Choices</h2>\n<p>You may ask us to update or delete your information at any time by calling or emailing us.</p>\n\n<h2>Contact Us</h2>\n<p>For any privacy questions, contact us at <b>{email}</b> or call <b>{phone}</b>. Address: {address}.</p>"
+            },
+            "seo_title": "Privacy Policy | Home Care",
+            "seo_description": "Privacy policy of Home Care — how we collect, use and protect your personal information."
+        },
+        {
+            "slug": "terms",
+            "title": "Terms & Conditions",
+            "template": "legal",
+            "content": {
+                "page_name": "Terms & Conditions",
+                "hero_title": "Terms & Conditions",
+                "hero_text": "",
+                "hero_image": "images/pages/page-hero.jpg",
+                "hero_image_mobile": "",
+                "last_updated": "6 October 2026",
+                "cta_show": true,
+                "body": "<p>By using this website or booking any service from <b>Home Care</b>, you agree to the following terms.</p>\n\n<h2>Our Services</h2>\n<p>We arrange trained nurses, caretakers, attendants and physiotherapists for care at your home. The exact duties of the staff are agreed with you before the service starts.</p>\n\n<h2>Booking & Charges</h2>\n<ul>\n<li>Charges depend on the service, shift and patient condition and are confirmed before the service starts.</li>\n<li>Payment terms (advance / weekly / monthly) are shared at the time of booking.</li>\n<li>Extra hours or additional duties may be charged separately.</li>\n</ul>\n\n<h2>Staff Replacement</h2>\n<p>If you are not satisfied with the staff member, please inform us and we will arrange a replacement as soon as possible.</p>\n\n<h2>Medical Responsibility</h2>\n<p>Our staff follow the treatment plan given by the patient's doctor. Home Care does not replace a doctor or hospital. In any emergency, please contact a doctor or hospital immediately.</p>\n\n<h2>Family Responsibilities</h2>\n<ul>\n<li>Share correct information about the patient's health and medicines.</li>\n<li>Provide a safe working environment and basic facilities for live-in staff.</li>\n<li>Do not hire our staff directly without informing us.</li>\n</ul>\n\n<h2>Cancellation</h2>\n<p>Please inform us at least 24 hours in advance to stop or change a service.</p>\n\n<h2>Contact</h2>\n<p>Questions about these terms? Call <b>{phone}</b> or email <b>{email}</b>.</p>"
+            },
+            "seo_title": "Terms & Conditions | Home Care",
+            "seo_description": "Terms and conditions for home nursing and patient care services provided by Home Care, East Delhi."
+        },
+        {
+            "slug": "thank-you",
+            "title": "Thank You",
+            "template": "thank-you",
+            "content": {
+                "page_name": "Thank You",
+                "hero_title": "Enquiry Received",
+                "hero_text": "Our care manager will call you shortly.",
+                "hero_image": "images/pages/thank-you-hero.jpg",
+                "hero_image_mobile": "",
+                "heading_name": "Thank You, {name}!",
+                "heading_general": "Thank You!",
+                "message_item": "We have received your enquiry for {item}. Our care manager will call you within 10 minutes.",
+                "message_general": "We have received your enquiry. Our care manager will call you within 10 minutes.",
+                "small_line": "Need help right now? Call or WhatsApp us — we are available 24×7."
+            },
+            "seo_title": "Thank You | Home Care",
+            "seo_description": "Thank you for contacting Home Care."
+        }
+    ],
+    "services": [
+        {
+            "order": 1,
+            "show": true,
+            "title": "Home Nursing",
+            "image": "images/services/home-nursing.jpg",
+            "badge": "12 / 24 hr shift",
+            "label": "Most Booked",
+            "category": "Nursing",
+            "text": "",
+            "features": [
+                "GNM / ANM qualified nurses",
+                "Injections, IV, dressing & catheter care",
+                "Vitals check & medicine management"
+            ],
+            "price": "",
+            "old_price": "",
+            "price_note": "",
+            "button_text": ""
+        },
+        {
+            "order": 2,
+            "show": true,
+            "title": "ICU at Home",
+            "image": "images/services/icu-at-home.jpg",
+            "badge": "24 hr ICU nurse",
+            "label": "Critical Care",
+            "category": "Nursing",
+            "text": "",
+            "features": [
+                "ICU-trained nurse with equipment setup",
+                "Oxygen, monitor, BiPAP / ventilator support",
+                "Doctor visit on call"
+            ],
+            "price": "",
+            "old_price": "",
+            "price_note": "",
+            "button_text": ""
+        },
+        {
+            "order": 3,
+            "show": true,
+            "title": "Elder Care",
+            "image": "images/services/elder-care.jpg",
+            "badge": "Day / Night / Live-in",
+            "label": "",
+            "category": "Care Attendant",
+            "text": "",
+            "features": [
+                "Trained attendant for senior citizens",
+                "Bathing, feeding & walking support",
+                "Companionship & medicine reminders"
+            ],
+            "price": "",
+            "old_price": "",
+            "price_note": "",
+            "button_text": ""
+        },
+        {
+            "order": 4,
+            "show": true,
+            "title": "Patient Care",
+            "image": "images/services/patient-care.jpg",
+            "badge": "12 / 24 hr shift",
+            "label": "",
+            "category": "Care Attendant",
+            "text": "",
+            "features": [
+                "Bedridden & post-surgery patients",
+                "Diaper change, sponge bath & positioning",
+                "Bed-sore prevention care"
+            ],
+            "price": "",
+            "old_price": "",
+            "price_note": "",
+            "button_text": ""
+        },
+        {
+            "order": 5,
+            "show": true,
+            "title": "Mother & Baby Care",
+            "image": "images/services/mother-baby-care.jpg",
+            "badge": "Japa / Baby care",
+            "label": "",
+            "category": "Care Attendant",
+            "text": "",
+            "features": [
+                "Experienced Japa maid / baby care nurse",
+                "Newborn bath, massage & feeding help",
+                "Post-delivery care for the mother"
+            ],
+            "price": "",
+            "old_price": "",
+            "price_note": "",
+            "button_text": ""
+        },
+        {
+            "order": 6,
+            "show": true,
+            "title": "Physiotherapy",
+            "image": "images/services/physiotherapy.jpg",
+            "badge": "Home visit",
+            "label": "",
+            "category": "Therapy",
+            "text": "",
+            "features": [
+                "Qualified BPT / MPT physiotherapist",
+                "Stroke, knee, back & post-surgery rehab",
+                "Home visit with exercise plan"
+            ],
+            "price": "",
+            "old_price": "",
+            "price_note": "",
+            "button_text": ""
+        }
+    ]
+}

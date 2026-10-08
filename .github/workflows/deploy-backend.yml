@@ -1,0 +1,52 @@
+# Builds the Laravel admin (with vendor/) and publishes it to the
+# "deploy-backend" branch. Hostinger (admin subdomain) deploys that branch.
+name: Deploy backend
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "backend/**"
+      - ".github/workflows/deploy-backend.yml"
+      - ".github/scripts/**"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: deploy-backend
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.3"
+          extensions: mbstring, intl, pdo_mysql, fileinfo, zip, gd
+          tools: composer:v2
+          coverage: none
+
+      - name: Install PHP packages (production)
+        working-directory: backend
+        run: composer install --no-dev --optimize-autoloader --no-interaction --no-progress --no-scripts
+
+      - name: Prepare files for the server
+        run: |
+          mkdir -p dist
+          rsync -a backend/ dist/ \
+            --exclude tests --exclude node_modules --exclude .env \
+            --exclude 'storage/logs/*.log' --exclude 'database/*.sqlite*' \
+            --exclude LOCAL-DEV-NOTES.txt
+          cd dist
+          rm -f bootstrap/cache/*.php
+          php artisan package:discover --ansi
+          # On the server, vendor/ must be part of the branch
+          grep -v -E '^/vendor$' .gitignore > .gitignore.tmp && mv .gitignore.tmp .gitignore
+
+      - name: Publish to deploy-backend branch
+        run: bash .github/scripts/publish-branch.sh "$GITHUB_WORKSPACE/dist" deploy-backend

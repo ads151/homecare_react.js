@@ -1,0 +1,8 @@
+# Built upload packages (made locally, too big for git)
+*.zip
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

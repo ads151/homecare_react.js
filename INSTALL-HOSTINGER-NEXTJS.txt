@@ -1,0 +1,105 @@
+=====================================================================
+  HOME CARE — NEXT.JS WEBSITE + LARAVEL ADMIN  (Hostinger, bina SSH)
+=====================================================================
+
+  2 hisse hain:
+    1) backend  = Laravel admin panel + API   → admin.yourdomain.com
+    2) frontend = Next.js website (visitors)  → yourdomain.com
+
+  ZIP files:
+    homecare-backend-laravel.zip   (admin, vendor folder ke saath)
+    homecare-frontend-nextjs.zip   (website ka source code)
+
+
+---------------------------------------------------------------------
+ STEP 1 — SUBDOMAIN + DATABASE
+---------------------------------------------------------------------
+  a) hPanel → Websites → Manage → Domains → Subdomains
+     → "admin" banao  (admin.yourdomain.com)
+  b) Security → SSL → admin.yourdomain.com ke liye SSL install karo
+  c) Databases → MySQL Databases → naya database + user + password
+  d) hPanel → PHP Configuration (admin subdomain ke liye) → PHP 8.3+
+
+
+---------------------------------------------------------------------
+ STEP 2 — BACKEND (ADMIN) UPLOAD + INSTALL
+---------------------------------------------------------------------
+  a) File Manager → admin subdomain ka folder (jaise public_html/admin
+     ya domains/yourdomain.com/public_html/admin)
+  b) homecare-backend-laravel.zip upload → Extract → ZIP delete
+  c) Browser: https://admin.yourdomain.com/install
+       - Database details (Step 1c)
+       - Website URL       = https://admin.yourdomain.com
+       - Next.js website   = https://yourdomain.com
+       - Admin email + password
+     → Install Website
+  d) Login: https://admin.yourdomain.com/admin
+  e) Site Settings → "Website (Next.js)" tab kholo. Wahan 2 cheezein
+     likhi hongi — inhe copy kar lo (Step 3 mein chahiye):
+       BACKEND_URL=https://admin.yourdomain.com
+       API_SECRET=xxxxxxxxxxxxxxxx
+
+
+---------------------------------------------------------------------
+ STEP 3 — FRONTEND (NEXT.JS WEBSITE)
+---------------------------------------------------------------------
+  hPanel → Websites → Add website → Node.js App (yourdomain.com)
+
+  Files dene ke 2 tareeke:
+    • "Upload files" → homecare-frontend-nextjs.zip
+    • ya GitHub repo connect karo (agar code GitHub par daala ho)
+
+  Settings:
+    Node.js version  : 20, 22 ya 24
+    Install command  : npm install
+    Build command    : npm run build
+    Start command    : npm start
+    Environment variables (Step 2e wale):
+        BACKEND_URL = https://admin.yourdomain.com
+        API_SECRET  = xxxxxxxxxxxxxxxx
+
+  Deploy dabao. 2–5 minute mein website live: https://yourdomain.com
+  SSL bhi ON karo (Security → SSL).
+
+
+---------------------------------------------------------------------
+ STEP 4 — CHECK KARO
+---------------------------------------------------------------------
+  ✔ https://yourdomain.com          → website khuli, photos dikh rahi hain
+  ✔ Form bharo                      → Admin → Enquiries mein aaya
+  ✔ Admin mein koi text badlo + Save → website par 2-3 second mein badla
+  ✔ https://yourdomain.com/admin    → admin panel par le jata hai
+  ✔ Admin → Site Settings → Website (Next.js) → "Refresh website now"
+    → "Website refreshed" aana chahiye
+
+  Uske baad: Site Settings → Email / SMTP (Gmail App Password) set karo.
+
+
+---------------------------------------------------------------------
+ ROZ KA KAAM
+---------------------------------------------------------------------
+  Text, photos, pages, SEO, services, enquiries → sirf ADMIN panel.
+  Website apne aap update hoti hai — kuch upload nahi karna.
+
+  Design (Next.js code) badla  → frontend dobara deploy karo
+                                  (GitHub push ya naya ZIP upload).
+  Backend update aaya          → backend files upload (.env aur
+                                  public/uploads REPLACE NA karo)
+                                  → Admin → System & Database →
+                                  "Update database" → "Clear cache".
+
+
+---------------------------------------------------------------------
+ PROBLEM AAYE TO
+---------------------------------------------------------------------
+  • Website par "Website is updating" ya error
+      → Node.js App ke Environment variables check karo
+        (BACKEND_URL bina "/" ke end mein, API_SECRET bilkul same).
+      → Admin khul raha hai? https://admin.yourdomain.com/admin
+  • Admin mein save kiya par website par purana dikh raha hai
+      → Site Settings → Website (Next.js) → "Refresh website now".
+        Error aaye to "Next.js website address" sahi likho.
+  • Photos nahi dikh rahi → BACKEND_URL galat hai.
+  • Secret badalna ho → Website (Next.js) tab → "Create NEW secret key"
+    → Node.js App mein API_SECRET update → Redeploy / Restart.
+=====================================================================
