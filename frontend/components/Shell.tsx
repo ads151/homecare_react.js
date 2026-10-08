@@ -3,70 +3,149 @@ import type { Data, PageData } from "@/lib/api";
 import { CallBtn, Icon, Paras, Title, WaBtn, img, list, on, pick, plainTitle, show, url, type H } from "@/lib/site";
 import Blocks from "./Blocks";
 import EnquiryForm from "./EnquiryForm";
+import Img from "./Img";
+import NavMenu, { type MenuItem } from "./NavMenu";
 import RawCode from "./RawCode";
 import { CtaBand } from "./Sections";
+import SmartLink, { isInternal } from "./SmartLink";
 
-/* Shared layout: top bar, header, mobile menu, inner banner, CTA, footer,
-   floating buttons, mobile bar and popup — same HTML as the original site. */
+/* =====================================================================
+   SITE CHROME (in the root layout — stays on screen while pages change):
+   top bar, header, mobile menu, footer, floating buttons, mobile bar, popup.
+   PAGE BODY (per page): banner, page content, extra sections, CTA.
+   Same HTML and CSS classes as the original website.
+   ===================================================================== */
 
 function Logo({ h, className = "logo" }: { h: H; className?: string }) {
   const name = String(h.s("business_name", "Home Care"));
   return (
-    <a href="/" className={className} aria-label={`${name} home`}>
-      {h.s("logo", "") && <img src={img(h.s("logo"))} alt={`${name} logo`} width={120} height={120} />}
+    <SmartLink href="/" className={className} aria-label={`${name} home`}>
+      {h.s("logo", "") && <Img src={h.s("logo")} alt={`${name} logo`} width={120} height={120} sizes="120px" priority />}
       {on(h.s("show_name_with_logo", true)) && (
         <span>
           <b>{name}</b>
           {h.s("tagline", "") && <small>{h.s("tagline")}</small>}
         </span>
       )}
-    </a>
+    </SmartLink>
   );
 }
 
-function Menu({ h, page }: { h: H; page: string }) {
+function menuItems(h: H): MenuItem[] {
+  return list(h.s("menu", []))
+    .map((m) => {
+      const label = pick(m, "label", 0);
+      const href = url(pick(m, "link", 1));
+      return { label, href, internal: isInternal(href) };
+    })
+    .filter((m) => m.label);
+}
+
+export function cssVars(h: H): string {
+  const v = (k: string, d: string) => {
+    const x = String(h.s(k, "") ?? "");
+    return (x || d).replace(/[;{}<>]/g, "");
+  };
   return (
-    <ul className="">
-      {list(h.s("menu", [])).map((m, i) => {
-        const label = pick(m, "label", 0);
-        if (!label) return null;
-        const link = pick(m, "link", 1).replace(/^\/+|\/+$/g, "");
-        const active = link === "" || link === "home" ? page === "home" : link === page;
-        return (
-          <li key={i}>
-            <a href={url(link)} className={active ? "active" : undefined} aria-current={active ? "page" : undefined}>
-              {label}
-            </a>
-          </li>
-        );
-      })}
-    </ul>
+    ":root{" +
+    `--primary:${v("colors.primary", "#1f5c99")};--secondary:${v("colors.secondary", "#1b8a6b")};--dark:${v("colors.dark", "#0f2a52")};` +
+    `--accent:${v("colors.accent", "#7cb93a")};--light:${v("colors.light", "#eef6f6")};` +
+    `--main-bg:${v("buttons.main_bg", "#2c9a55")};--main-color:${v("buttons.main_color", "#fff")};` +
+    `--call-bg:${v("buttons.call_bg", "#1f5c99")};--call-color:${v("buttons.call_color", "#fff")};` +
+    `--wa-bg:${v("buttons.whatsapp_bg", "#25D366")};--wa-color:${v("buttons.whatsapp_color", "#fff")};` +
+    `--submit-bg:${v("buttons.submit_bg", "#2c9a55")};--submit-color:${v("buttons.submit_color", "#fff")};` +
+    `--quote-bg:${v("buttons.quote_bg", "#ffffff")};--quote-color:${v("buttons.quote_color", "#0f2a52")};` +
+    "}"
   );
 }
 
-function InnerHero({ c }: { c: Data }) {
-  const name = c.page_name || plainTitle(c.hero_title);
-  const bg = String(c.hero_image || "images/pages/page-hero.jpg");
+export const tracking = (h: H, box: string) => (on(h.s(`tracking.${box}_code_on`, false)) ? String(h.s(`tracking.${box}_code`, "")) : "");
+
+export function SiteHeader({ h }: { h: H }) {
+  const mainText = String(h.s("header_button_text", h.s("buttons.main_text", "Book Now")));
+  const items = menuItems(h);
   return (
-    <section className="page-hero">
-      <picture className="hero-bg">
-        {c.hero_image_mobile && <source media="(max-width: 640px)" srcSet={img(c.hero_image_mobile)} />}
-        <img src={img(bg)} alt={c.hero_image_alt || name} fetchPriority="high" decoding="async" />
-      </picture>
-      <div className="wrap">
-        <nav className="crumbs" aria-label="Breadcrumb">
-          <a href="/">Home</a> <span>›</span> <span aria-current="page">{name}</span>
+    <>
+      <a className="skip" href="#main">
+        Skip to content
+      </a>
+
+      {on(h.s("topbar_show", true)) && (
+        <div className="topbar">
+          <div className="wrap">
+            <span className="live">
+              <i className="dot" /> {h.s("topbar_text", "")}
+            </span>
+            <span className="tb-right">
+              <a href={`mailto:${h.s("email")}`}>
+                <Icon name="mail" />
+                {h.s("email")}
+              </a>
+              <span>
+                <Icon name="clock" />
+                {h.s("working_hours")}
+              </span>
+            </span>
+          </div>
+        </div>
+      )}
+
+      <header className="site-header">
+        <div className="wrap">
+          <Logo h={h} />
+          <nav className="main-nav" aria-label="Main menu">
+            <NavMenu items={items} />
+          </nav>
+          <div className="h-actions">
+            {on(h.s("header_phone_show", true)) && (
+              <a className="h-phone" href={h.tel} data-track="call">
+                <span className="h-ic">
+                  <Icon name="phone" />
+                </span>
+                <span className="h-txt">
+                  <small>{h.s("header_phone_label", "Call 24×7")}</small>
+                  {h.s("mobile")}
+                </span>
+              </a>
+            )}
+            {on(h.s("header_button_show", true)) && (
+              <button type="button" className="btn btn-main h-btn" data-popup="" data-item="">
+                {mainText}
+              </button>
+            )}
+            <button type="button" className="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mnav">
+              <span />
+              <span />
+              <span />
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <div className="mnav-overlay" data-close-menu="" />
+      <aside className="mnav" id="mnav" aria-label="Mobile menu" aria-hidden="true">
+        <div className="mnav-top">
+          <Logo h={h} className="logo logo-sm" />
+          <button type="button" className="mnav-x" aria-label="Close menu" data-close-menu="">
+            ×
+          </button>
+        </div>
+        <nav>
+          <NavMenu items={items} />
         </nav>
-        <h1>
-          <Title text={c.hero_title || name} />
-        </h1>
-        {c.hero_text && <p>{c.hero_text}</p>}
-      </div>
-    </section>
+        <div className="mnav-btns">
+          <CallBtn h={h} text={`${h.s("buttons.call_text", "Call Now")} ${h.s("mobile")}`} />
+          <WaBtn h={h} />
+          <button type="button" className="btn btn-main" data-popup="" data-item="">
+            {mainText}
+          </button>
+        </div>
+      </aside>
+    </>
   );
 }
 
-function Footer({ h }: { h: H }) {
+export function SiteFooter({ h }: { h: H }) {
   const social = (h.s("social", {}) || {}) as Data;
   const cols: [string, unknown][] = [
     [h.s("footer_quick_title", "Quick Links"), h.s("footer_quick_links", [])],
@@ -74,69 +153,74 @@ function Footer({ h }: { h: H }) {
   ];
   const nets = Object.entries(social).filter(([, v]) => String(v ?? "").trim() !== "");
   return (
-    <footer className="site-footer">
-      <div className="wrap">
-        <div className="fgrid">
-          <div className="f-about">
-            <Logo h={h} className="logo logo-footer" />
-            <Paras text={h.s("footer_about", "")} />
-            {nets.length > 0 && (
-              <div className="social">
-                {nets.map(([net, link]) => (
-                  <a key={net} href={String(link)} target="_blank" rel="noopener" aria-label={net.charAt(0).toUpperCase() + net.slice(1)}>
-                    <Icon name={net} />
-                  </a>
-                ))}
+    <>
+      <footer className="site-footer">
+        <div className="wrap">
+          <div className="fgrid">
+            <div className="f-about">
+              <Logo h={h} className="logo logo-footer" />
+              <Paras text={h.s("footer_about", "")} />
+              {nets.length > 0 && (
+                <div className="social">
+                  {nets.map(([net, link]) => (
+                    <a key={net} href={String(link)} target="_blank" rel="noopener" aria-label={net.charAt(0).toUpperCase() + net.slice(1)}>
+                      <Icon name={net} />
+                    </a>
+                  ))}
+                </div>
+              )}
+            </div>
+            {cols.map(([title, links], k) => (
+              <div key={k}>
+                <h3 className="f-h">{title}</h3>
+                <ul>
+                  {list(links).map((l, i) =>
+                    pick(l, "label", 0) ? (
+                      <li key={i}>
+                        <SmartLink href={url(pick(l, "link", 1))}>{pick(l, "label", 0)}</SmartLink>
+                      </li>
+                    ) : null,
+                  )}
+                </ul>
               </div>
-            )}
-          </div>
-          {cols.map(([title, links], k) => (
-            <div key={k}>
-              <h3 className="f-h">{title}</h3>
-              <ul>
-                {list(links).map((l, i) =>
-                  pick(l, "label", 0) ? (
-                    <li key={i}>
-                      <a href={url(pick(l, "link", 1))}>{pick(l, "label", 0)}</a>
-                    </li>
-                  ) : null,
-                )}
+            ))}
+            <div>
+              <h3 className="f-h">{h.s("footer_contact_title", "Contact Us")}</h3>
+              <ul className="f-contact">
+                <li>
+                  <Icon name="phone" />
+                  <a href={h.tel} data-track="call">
+                    {h.s("mobile")}
+                  </a>
+                </li>
+                <li>
+                  <Icon name="whatsapp" />
+                  <a href={h.wa()} target="_blank" rel="noopener" data-track="whatsapp">
+                    WhatsApp: {h.s("mobile")}
+                  </a>
+                </li>
+                <li>
+                  <Icon name="mail" />
+                  <a href={`mailto:${h.s("email")}`}>{h.s("email")}</a>
+                </li>
+                <li>
+                  <Icon name="pin" />
+                  <span>{h.s("address")}</span>
+                </li>
+                <li>
+                  <Icon name="clock" />
+                  <span>{h.s("working_hours")}</span>
+                </li>
               </ul>
             </div>
-          ))}
-          <div>
-            <h3 className="f-h">{h.s("footer_contact_title", "Contact Us")}</h3>
-            <ul className="f-contact">
-              <li>
-                <Icon name="phone" />
-                <a href={h.tel} data-track="call">
-                  {h.s("mobile")}
-                </a>
-              </li>
-              <li>
-                <Icon name="whatsapp" />
-                <a href={h.wa()} target="_blank" rel="noopener" data-track="whatsapp">
-                  WhatsApp: {h.s("mobile")}
-                </a>
-              </li>
-              <li>
-                <Icon name="mail" />
-                <a href={`mailto:${h.s("email")}`}>{h.s("email")}</a>
-              </li>
-              <li>
-                <Icon name="pin" />
-                <span>{h.s("address")}</span>
-              </li>
-              <li>
-                <Icon name="clock" />
-                <span>{h.s("working_hours")}</span>
-              </li>
-            </ul>
           </div>
+          <div className="copy">{String(h.s("copyright", "© {year}")).replace("{year}", String(new Date().getFullYear()))}</div>
         </div>
-        <div className="copy">{String(h.s("copyright", "© {year}")).replace("{year}", String(new Date().getFullYear()))}</div>
-      </div>
-    </footer>
+      </footer>
+      <Floating h={h} />
+      <MobileBar h={h} />
+      <Popup h={h} />
+    </>
   );
 }
 
@@ -224,131 +308,47 @@ function Popup({ h }: { h: H }) {
   );
 }
 
-function cssVars(h: H): string {
-  const v = (k: string, d: string) => {
-    const x = String(h.s(k, "") ?? "");
-    return (x || d).replace(/[;{}<>]/g, "");
-  };
+function InnerHero({ c }: { c: Data }) {
+  const name = c.page_name || plainTitle(c.hero_title);
+  const bg = String(c.hero_image || "images/pages/page-hero.jpg");
   return (
-    ":root{" +
-    `--primary:${v("colors.primary", "#1f5c99")};--secondary:${v("colors.secondary", "#1b8a6b")};--dark:${v("colors.dark", "#0f2a52")};` +
-    `--accent:${v("colors.accent", "#7cb93a")};--light:${v("colors.light", "#eef6f6")};` +
-    `--main-bg:${v("buttons.main_bg", "#2c9a55")};--main-color:${v("buttons.main_color", "#fff")};` +
-    `--call-bg:${v("buttons.call_bg", "#1f5c99")};--call-color:${v("buttons.call_color", "#fff")};` +
-    `--wa-bg:${v("buttons.whatsapp_bg", "#25D366")};--wa-color:${v("buttons.whatsapp_color", "#fff")};` +
-    `--submit-bg:${v("buttons.submit_bg", "#2c9a55")};--submit-color:${v("buttons.submit_color", "#fff")};` +
-    `--quote-bg:${v("buttons.quote_bg", "#ffffff")};--quote-color:${v("buttons.quote_color", "#0f2a52")};` +
-    "}"
+    <section className="page-hero">
+      <picture className="hero-bg">
+        {c.hero_image_mobile && <source media="(max-width: 640px)" srcSet={img(c.hero_image_mobile)} />}
+        <img src={img(bg)} alt={c.hero_image_alt || name} fetchPriority="high" decoding="async" />
+      </picture>
+      <div className="wrap">
+        <nav className="crumbs" aria-label="Breadcrumb">
+          <SmartLink href="/">Home</SmartLink> <span>›</span> <span aria-current="page">{name}</span>
+        </nav>
+        <h1>
+          <Title text={c.hero_title || name} />
+        </h1>
+        {c.hero_text && <p>{c.hero_text}</p>}
+      </div>
+    </section>
   );
 }
 
+/** The changing part of every page (inside <main>). */
 export default function Shell({ h, page, children, showCta = true }: { h: H; page: PageData; children: ReactNode; showCta?: boolean }) {
   const c = page.content;
   const slug = page.slug === "home" ? "home" : page.slug;
-  const mainText = String(h.s("header_button_text", h.s("buttons.main_text", "Book Now")));
-  const tracking = (box: string) => (on(h.s(`tracking.${box}_code_on`, false)) ? String(h.s(`tracking.${box}_code`, "")) : "");
   const ctaHeading = c.cta_heading || h.s("cta_heading", "Need care at home today?");
   const ctaText = c.cta_text || h.s("cta_text", "");
 
   return (
     <div className={`page-${slug}`}>
-      <style dangerouslySetInnerHTML={{ __html: cssVars(h) }} />
       {page.seo.jsonld.map((j, i) => (
         <script key={i} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(j).replace(/</g, "\\u003c") }} />
       ))}
-      <RawCode html={tracking("head")} id="tc-head" />
-      {slug === "thank-you" && <RawCode html={tracking("thankyou")} id="tc-ty" />}
-      <RawCode html={c.head_code} id="tc-page" />
-      <RawCode html={tracking("bodystart")} id="tc-bs" />
+      <RawCode html={c.head_code} id={`tc-page-${slug}`} />
+      {slug === "thank-you" && <RawCode html={tracking(h, "thankyou")} id="tc-ty" />}
 
-      <a className="skip" href="#main">
-        Skip to content
-      </a>
-
-      {on(h.s("topbar_show", true)) && (
-        <div className="topbar">
-          <div className="wrap">
-            <span className="live">
-              <i className="dot" /> {h.s("topbar_text", "")}
-            </span>
-            <span className="tb-right">
-              <a href={`mailto:${h.s("email")}`}>
-                <Icon name="mail" />
-                {h.s("email")}
-              </a>
-              <span>
-                <Icon name="clock" />
-                {h.s("working_hours")}
-              </span>
-            </span>
-          </div>
-        </div>
-      )}
-
-      <header className="site-header">
-        <div className="wrap">
-          <Logo h={h} />
-          <nav className="main-nav" aria-label="Main menu">
-            <Menu h={h} page={slug} />
-          </nav>
-          <div className="h-actions">
-            {on(h.s("header_phone_show", true)) && (
-              <a className="h-phone" href={h.tel} data-track="call">
-                <span className="h-ic">
-                  <Icon name="phone" />
-                </span>
-                <span className="h-txt">
-                  <small>{h.s("header_phone_label", "Call 24×7")}</small>
-                  {h.s("mobile")}
-                </span>
-              </a>
-            )}
-            {on(h.s("header_button_show", true)) && (
-              <button type="button" className="btn btn-main h-btn" data-popup="" data-item="">
-                {mainText}
-              </button>
-            )}
-            <button type="button" className="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mnav">
-              <span />
-              <span />
-              <span />
-            </button>
-          </div>
-        </div>
-      </header>
-
-      <div className="mnav-overlay" data-close-menu="" />
-      <aside className="mnav" id="mnav" aria-label="Mobile menu" aria-hidden="true">
-        <div className="mnav-top">
-          <Logo h={h} className="logo logo-sm" />
-          <button type="button" className="mnav-x" aria-label="Close menu" data-close-menu="">
-            ×
-          </button>
-        </div>
-        <nav>
-          <Menu h={h} page={slug} />
-        </nav>
-        <div className="mnav-btns">
-          <CallBtn h={h} text={`${h.s("buttons.call_text", "Call Now")} ${h.s("mobile")}`} />
-          <WaBtn h={h} />
-          <button type="button" className="btn btn-main" data-popup="" data-item="">
-            {mainText}
-          </button>
-        </div>
-      </aside>
-
-      <main id="main">
-        {page.template !== "home" && show(c.hero_show) && <InnerHero c={c} />}
-        {children}
-        <Blocks h={h} blocks={c.extra_blocks} page={slug} />
-        {showCta && <CtaBand h={h} heading={String(ctaHeading)} text={String(ctaText)} />}
-      </main>
-
-      <Footer h={h} />
-      <Floating h={h} />
-      <MobileBar h={h} />
-      <Popup h={h} />
-      <RawCode html={tracking("bodyend")} id="tc-be" />
+      {page.template !== "home" && show(c.hero_show) && <InnerHero c={c} />}
+      {children}
+      <Blocks h={h} blocks={c.extra_blocks} page={slug} />
+      {showCta && <CtaBand h={h} heading={String(ctaHeading)} text={String(ctaText)} />}
     </div>
   );
 }

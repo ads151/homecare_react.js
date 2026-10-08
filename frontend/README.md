@@ -5,8 +5,12 @@ from the Laravel admin panel (backend) through its JSON API.
 
 - Next.js 16 (App Router) + React 19, TypeScript
 - Same design as the original site (`app/site.css`, `public/assets/site/main.js`)
-- Pages are rendered on request; content is cached and refreshed automatically
-  when something is saved in the admin (`/api/revalidate`)
+- Smooth like an app: pages change without reloading (Next.js Link + prefetch),
+  page fade-in, scroll animations, top loading bar, optimized WebP photos
+- Pages are built on the first visit and served from cache (ISR); the admin
+  refreshes the cache after every save (`/api/revalidate`)
+- `components/SiteBehaviors.tsx` = menu, popup, forms, filters, tracking
+  (Google Tag Manager gets a `page_view` event on every page change)
 - Enquiry forms post to `/api/enquiry`, which passes them to the backend
 
 ## Settings (.env)

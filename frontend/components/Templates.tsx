@@ -2,6 +2,8 @@ import type { PageData } from "@/lib/api";
 import { Button, CallBtn, Icon, Paras, SecHeadN, Title, WaBtn, img, on, plainTitle, show, type H } from "@/lib/site";
 import Blocks from "./Blocks";
 import EnquiryForm from "./EnquiryForm";
+import Img from "./Img";
+import SmartLink from "./SmartLink";
 import { Areas, Boxes, CardsGrid, ContactCards, ContactList, CtaBand, Faq, Feat, MapFrame, PhotoCards, Stats, Steps, Testimonials, Ticks } from "./Sections";
 import Shell from "./Shell";
 
@@ -85,7 +87,7 @@ function Home({ h, page }: P) {
         <section className="sec why" id="why-us">
           <div className="wrap two">
             <div className="why-img">
-              {c.section4_image && <img src={img(c.section4_image)} alt={c.section4_image_alt || plainTitle(c.section4_heading)} loading="lazy" decoding="async" width={800} height={860} />}
+              {c.section4_image && <Img src={c.section4_image} alt={c.section4_image_alt || plainTitle(c.section4_heading)} width={800} height={860} sizes="(max-width: 980px) 100vw, 560px" />}
               {c.section4_badge_big && (
                 <div className="float">
                   <b>{c.section4_badge_big}</b>
@@ -165,7 +167,7 @@ function About({ h, page }: P) {
       {show(c.section1_show) && (
         <section className="sec">
           <div className="wrap two about-intro">
-            <div className="about-img">{c.section1_image && <img src={img(c.section1_image)} alt={c.section1_image_alt || plainTitle(c.section1_heading)} loading="lazy" decoding="async" width={900} height={700} />}</div>
+            <div className="about-img">{c.section1_image && <Img src={c.section1_image} alt={c.section1_image_alt || plainTitle(c.section1_heading)} width={900} height={700} sizes="(max-width: 980px) 100vw, 560px" />}</div>
             <div>
               <SecHeadN c={c} n={1} center={false} />
               <Ticks items={c.section1_items} />
@@ -283,9 +285,9 @@ function ThankYou({ h, page, name, item }: P & { name: string; item: string }) {
                 </span>
               </a>
               <WaBtn h={h} item={item} />
-              <a className="btn btn-outline" href="/">
+              <SmartLink className="btn btn-outline" href="/">
                 {h.s("thankyou.home_text", "Back to Home")}
-              </a>
+              </SmartLink>
             </div>
           </div>
         </div>
@@ -324,9 +326,9 @@ export function NotFound({ h }: { h: H }) {
             <h2>Oops! This page is not available.</h2>
             <p className="ty-msg">The link may be old or typed wrongly. Please go back to the home page, or call us — we are happy to help.</p>
             <div className="ty-btns">
-              <a className="btn btn-main" href="/">
+              <SmartLink className="btn btn-main" href="/">
                 Go to Home Page
-              </a>
+              </SmartLink>
               <CallBtn h={h} text={`${h.s("buttons.call_text", "Call Now")} ${h.s("mobile")}`} />
             </div>
           </div>

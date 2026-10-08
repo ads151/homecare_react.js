@@ -1,5 +1,6 @@
 import type { Card } from "@/lib/api";
 import { BoxLink, CallBtn, Icon, Paras, list, pick, img, strings, type H } from "@/lib/site";
+import Img from "./Img";
 
 /* Reusable pieces used by the page designs and by the Page Builder. */
 
@@ -8,7 +9,7 @@ export function ServiceCard({ h, card }: { h: H; card: Card }) {
   return (
     <article className="card" data-cat={(card.category || "").trim()}>
       <div className="ph">
-        {card.image && <img src={img(card.image)} alt={card.image_alt || t} loading="lazy" decoding="async" width={700} height={440} />}
+        {card.image && <Img src={card.image} alt={card.image_alt || t} width={700} height={440} sizes="(max-width: 640px) 100vw, (max-width: 1100px) 50vw, 400px" />}
         {card.badge && <span className="badge">{card.badge}</span>}
         {card.label && <span className="label">{card.label}</span>}
       </div>
@@ -152,7 +153,7 @@ export function PhotoCards({ items }: { items: unknown }) {
         const title = pick(r, "title");
         return (
           <BoxLink link={pick(r, "link")} item={title} className="pcard" key={i}>
-            {pick(r, "image") && <img src={img(pick(r, "image"))} alt={pick(r, "image_alt") || title} loading="lazy" decoding="async" width={700} height={440} />}
+            {pick(r, "image") && <Img src={pick(r, "image")} alt={pick(r, "image_alt") || title} width={700} height={440} sizes="(max-width: 640px) 100vw, (max-width: 1100px) 50vw, 300px" />}
             <span className="pc-txt">
               <b>{title}</b>
               {pick(r, "text") && <small>{pick(r, "text")}</small>}
