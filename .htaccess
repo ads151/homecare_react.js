@@ -1,0 +1,17 @@
+# =====================================================================
+#  Sends every visitor to the "public" folder of the website.
+#  Keep this file in public_html (next to the "public" folder).
+# =====================================================================
+Options -Indexes
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>
+
+# Never show hidden / private files
+<FilesMatch "^\.|\.(env|log|sql|lock|md|yml|yaml|neon|dist)$|^(artisan|composer\.(json|lock)|package\.json|phpunit\.xml)$">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+</FilesMatch>

@@ -1,0 +1,126 @@
+=====================================================================
+  HOME CARE WEBSITE (Laravel + Filament Admin) — HOSTINGER INSTALL
+  Bina SSH ke, sirf File Manager + browser se.
+=====================================================================
+
+ZAROORI (pehle check karein)
+---------------------------------------------------------------------
+  • Hostinger hPanel → Advanced → PHP Configuration → PHP 8.3 (ya 8.4)
+  • Same page → PHP Extensions: intl, pdo_mysql, fileinfo, mbstring
+    ON hone chahiye (Hostinger par aam taur par pehle se ON hote hain)
+
+
+STEP 1 — DATABASE BANAYEIN
+---------------------------------------------------------------------
+  hPanel → Databases → MySQL Databases → "Create a New MySQL Database"
+    - Database name   (jaise u123456789_homecare)
+    - Username        (jaise u123456789_admin)
+    - Password        (strong password — note kar lein)
+  Ye teeno details Step 4 mein chahiye.
+
+
+STEP 2 — PURANI WEBSITE KA BACKUP
+---------------------------------------------------------------------
+  File Manager → public_html → saari files select → Compress → download.
+  (Purani leads: public_html/data/leads.csv bhi download kar lein.)
+  Phir public_html KHALI kar dein.
+
+
+STEP 3 — NAYI FILES UPLOAD KAREIN
+---------------------------------------------------------------------
+  File Manager → public_html → Upload → homecare-website-laravel.zip
+  ZIP par right-click → Extract → "." (yahi folder) chunein.
+  Extract ke baad public_html ke andar ye dikhna chahiye:
+      app  bootstrap  config  database  public  resources  routes
+      storage  vendor  .htaccess  .env  artisan ...
+  (Agar sab ek extra folder ke andar aa gaya ho, to us folder ki saari
+   files public_html mein MOVE kar dein.)
+  ZIP file ko delete kar dein.
+
+  NOTE: .env aur .htaccess "hidden files" hain. File Manager mein
+  Settings → "Show hidden files" ON karein.
+
+
+STEP 4 — INSTALLER CHALAYEIN
+---------------------------------------------------------------------
+  Browser mein kholiye:   https://www.yourdomain.com/install
+    1. Server check — sab ✔ green hona chahiye
+    2. Database host = localhost, Port = 3306,
+       Database name / username / password = Step 1 wale
+    3. Website URL — apne aap aa jayega (https://... check kar lein)
+    4. Admin naam, email, password (min 8 characters) — yaad rakhein!
+  "Install Website" dabayein. 1 minute mein ho jayega.
+  Installer apne aap:
+    ✔ saari tables banata hai
+    ✔ purani website ka saara text, services, photos, settings daalta hai
+    ✔ admin login banata hai aur khud ko LOCK kar deta hai
+
+
+STEP 5 — ADMIN PANEL
+---------------------------------------------------------------------
+  https://www.yourdomain.com/admin   → email + password se login
+
+  Sabse pehle ye karein:
+    a) Settings → Site Settings → "Email / SMTP"
+         Gmail: smtp.gmail.com · 465 · SSL · username = poora Gmail
+                password = 16-letter App Password (normal password
+                kaam nahi karega). Google Account → Security →
+                2-Step Verification ON → App passwords.
+         Hostinger email: smtp.hostinger.com · 465 · SSL ·
+                username = poora email · password = email ka password
+       "Send test email" dabakar check karein → phir "Save settings".
+    b) Phone, WhatsApp, Email — "Phone, WhatsApp & Email" tab.
+    c) Tracking codes (GTM / GA4 / Google Ads) — "Tracking Codes" tab.
+    d) Ek test enquiry bhejein → Admin → Enquiries mein dikhni chahiye.
+
+
+ADMIN PANEL MEIN KYA-KYA HAI
+---------------------------------------------------------------------
+  Dashboard ............ aaj ki / naye enquiries, average SEO score
+  Website → Pages ...... har page edit + NAYE PAGE banaiye (Page Builder)
+                         + SEO tab: focus keyword, title, description,
+                         Google preview, SEO SCORE (0-100) live
+  Website → Services ... service cards add / edit / photo / order (drag)
+  Website → Media ...... koi bhi photo / PDF upload → link copy
+  Enquiries ............ saari form entries, status (New/Called/...),
+                         notes, Call / WhatsApp button, Excel (CSV) export
+  Settings → Site Settings ... business, logo, phone, WhatsApp, email,
+                         menu, footer, colours, buttons, popup, floating
+                         buttons, form fields, SMTP, tracking, Google SEO
+  Settings → System & Database ... "Update database" button,
+                         Clear cache, Backup download
+  Settings → Admin users ... aur admin add karein / password badlein
+
+
+NAYA PAGE KAISE BANAYEIN (jaise "ICU at Home in Noida")
+---------------------------------------------------------------------
+  Pages → New page → Page name likhein (URL apne aap banega)
+  Design = "Page Builder" → "Add a section" se sections jodein:
+    Heading + Text · Photo + Text · Service Cards · FAQ · Testimonials
+    Why Choose Us · Steps · Numbers · Photo Cards · Areas · Gallery
+    YouTube Video · Enquiry Form · Contact + Map · CTA Banner · HTML ...
+  SEO tab → focus keyword + title + description → score 80+ ka target.
+  Save → "View page".
+  Menu mein dikhana ho to: Site Settings → Header & Menu → Add link.
+
+
+AAGE CHAL KAR UPDATE (naya version aaye to)
+---------------------------------------------------------------------
+  1. Admin → System & Database → "Download backup"
+  2. Nayi files upload karein — .env file aur public/uploads folder ko
+     REPLACE NA karein
+  3. Admin → System & Database → "Update database" → "Clear cache"
+
+
+PROBLEM AAYE TO
+---------------------------------------------------------------------
+  • 500 error / blank page → hPanel mein PHP 8.3 select hai?
+    storage aur bootstrap/cache folders ki permission 755 karein.
+  • /install dobara chalana ho → storage/app/installed.lock delete karein
+    (dhyan dein: installer purana data delete nahi karta).
+  • Email nahi aa raha → Site Settings → Email / SMTP → "Send test email"
+    jo error dikhaye wahi theek karein. Enquiries phir bhi admin mein
+    save hoti rehti hain.
+  • Admin password bhool gaye → login page par "Forgot password?"
+    (SMTP set hona chahiye) ya doosre admin se reset karwayein.
+=====================================================================
