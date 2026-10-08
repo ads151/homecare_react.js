@@ -1,3 +1,4 @@
+import { connection } from "next/server";
 import { cache } from "react";
 
 /* ---------------------------------------------------------------------
@@ -80,6 +81,9 @@ async function get<T>(path: string): Promise<T | null> {
 
 /** Settings, menu, services, form fields (one request per page view). */
 export const getSite = cache(async (): Promise<Site> => {
+  // While building on the server the admin may not be reachable yet:
+  // render such pages on the first visit instead of during the build.
+  if (process.env.NEXT_PHASE === "phase-production-build") await connection();
   const site = await get<Site>("/site");
   if (!site) throw new Error("Backend did not return site settings.");
   return site;

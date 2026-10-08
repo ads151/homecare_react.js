@@ -1,6 +1,7 @@
 import type { Data } from "@/lib/api";
 import { Button, Paras, SecHead, Title, WaBtn, img, list, on, pick, plainTitle, show, type H } from "@/lib/site";
 import EnquiryForm from "./EnquiryForm";
+import Img from "./Img";
 import { Areas, Boxes, CardsGrid, ContactCards, ContactList, CtaBand, Faq, Feat, MapFrame, PhotoCards, Stats, Steps, Testimonials, Ticks } from "./Sections";
 
 /* Page Builder sections (added from Admin → Pages). Same design classes as the original site. */
@@ -50,7 +51,7 @@ function Block({ h, b, i, page }: { h: H; b: B; i: number; page: string }) {
     case "image_text": {
       const right = d.image_position === "right";
       const alt = d.image_alt || plainTitle(d.heading);
-      const image = <div className="about-img">{d.image && <img src={img(d.image)} alt={alt} loading="lazy" decoding="async" width={900} height={700} />}</div>;
+      const image = <div className="about-img">{d.image && <Img src={d.image} alt={alt} width={900} height={700} sizes="(max-width: 980px) 100vw, 560px" />}</div>;
       const text = (
         <div>
           <Head d={d} center={false} />
@@ -105,7 +106,7 @@ function Block({ h, b, i, page }: { h: H; b: B; i: number; page: string }) {
         <Sec d={d} extra="why">
           <div className="wrap two">
             <div className="why-img">
-              {d.image && <img src={img(d.image)} alt={d.image_alt || plainTitle(d.heading)} loading="lazy" decoding="async" width={800} height={860} />}
+              {d.image && <Img src={d.image} alt={d.image_alt || plainTitle(d.heading)} width={800} height={860} sizes="(max-width: 980px) 100vw, 560px" />}
               {d.badge_big && (
                 <div className="float">
                   <b>{d.badge_big}</b>
@@ -264,7 +265,7 @@ function Block({ h, b, i, page }: { h: H; b: B; i: number; page: string }) {
                 .filter((g) => pick(g, "image") !== "")
                 .map((g, k) => (
                   <figure key={k}>
-                    <img src={img(pick(g, "image"))} alt={pick(g, "alt") || pick(g, "caption")} loading="lazy" decoding="async" />
+                    <Img src={pick(g, "image")} alt={pick(g, "alt") || pick(g, "caption")} width={800} height={600} sizes="(max-width: 640px) 100vw, 320px" />
                     {pick(g, "caption") && <figcaption>{pick(g, "caption")}</figcaption>}
                   </figure>
                 ))}

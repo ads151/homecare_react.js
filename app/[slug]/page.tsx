@@ -1,7 +1,13 @@
-import { permanentRedirect } from "next/navigation";
 import { renderSlug, siteViewport, slugMetadata } from "@/lib/render";
 
-export const revalidate = 0;
+/* Pages are built on first visit and then served from cache (very fast).
+   The admin refreshes the cache after every save; time limit as a safety net. */
+export const revalidate = 3600;
+export const dynamicParams = true;
+
+export async function generateStaticParams() {
+  return []; // nothing at build time (the admin may not be reachable then)
+}
 
 export async function generateMetadata({ params }: PageProps<"/[slug]">) {
   const { slug } = await params;
@@ -10,10 +16,7 @@ export async function generateMetadata({ params }: PageProps<"/[slug]">) {
 
 export const generateViewport = siteViewport;
 
-export default async function SlugPage({ params, searchParams }: PageProps<"/[slug]">) {
+export default async function SlugPage({ params }: PageProps<"/[slug]">) {
   const { slug } = await params;
-  if (slug === "home" || slug === "index") permanentRedirect("/");
-  const q = slug === "thank-you" ? await searchParams : {};
-  const one = (v: unknown) => (Array.isArray(v) ? String(v[0] ?? "") : String(v ?? ""));
-  return renderSlug(slug, { name: one(q.name), item: one(q.item) });
+  return renderSlug(slug);
 }

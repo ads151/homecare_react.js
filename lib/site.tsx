@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import type { Data, Site } from "./api";
 import { ICONS } from "./icons";
+import SmartLink from "@/components/SmartLink";
 
 /* ---------------------------------------------------------------------
    Small helpers — same behaviour as the original PHP website helpers.
@@ -127,9 +128,9 @@ export function Button({ text, link, className = "btn btn-main", item = "", deta
   }
   if (!l) return null;
   return (
-    <a className={className} href={url(l)}>
+    <SmartLink className={className} href={url(l)}>
       {t}
-    </a>
+    </SmartLink>
   );
 }
 
@@ -144,9 +145,9 @@ export function BoxLink({ link, item, className, children }: { link: unknown; it
   }
   if (l) {
     return (
-      <a className={className + " is-link"} href={url(l)}>
+      <SmartLink className={className + " is-link"} href={url(l)}>
         {children}
-      </a>
+      </SmartLink>
     );
   }
   return <div className={className}>{children}</div>;
