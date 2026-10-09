@@ -18,7 +18,7 @@ class ListLeads extends ListRecords
         foreach (Lead::STATUSES as $key => $label) {
             $tabs[$key] = Tab::make($label)
                 ->badge(fn () => Lead::query()->where('status', $key)->count() ?: null)
-                ->modifyQueryUsing(fn (Builder $q) => $q->where('status', $key));
+                ->modifyQueryUsing(fn (Builder $query) => $query->where('status', $key));
         }
 
         return $tabs;
