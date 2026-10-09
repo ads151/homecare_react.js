@@ -134,7 +134,7 @@ class LeadResource extends Resource
                 Filter::make('date')->schema([
                     DatePicker::make('from')->label('From date'),
                     DatePicker::make('until')->label('To date'),
-                ])->query(fn (Builder $q, array $data) => $q
+                ])->query(fn (Builder $query, array $data) => $query
                     ->when($data['from'] ?? null, fn ($q, $d) => $q->whereDate('created_at', '>=', $d))
                     ->when($data['until'] ?? null, fn ($q, $d) => $q->whereDate('created_at', '<=', $d))),
             ])
