@@ -60,14 +60,18 @@ class Frontend
         }
     }
 
-    /** Refresh once, after the response has been sent (so admin saves stay fast). */
+    /** Refresh once per request, after the response has been sent (so admin saves stay fast). */
     public static function refreshLater(): void
     {
-        static $queued = false;
-        if ($queued || ! static::connected()) {
+        // The flag lives on the app (one per request), not in a static variable,
+        // so a long-running process keeps refreshing after every later save too.
+        if (app()->bound('frontend.refresh-queued') || ! static::connected()) {
             return;
         }
-        $queued = true;
-        app()->terminating(fn () => static::refresh());
+        app()->instance('frontend.refresh-queued', true);
+        app()->terminating(function () {
+            app()->forgetInstance('frontend.refresh-queued');
+            static::refresh();
+        });
     }
 }
