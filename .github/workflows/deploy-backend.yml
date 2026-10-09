@@ -19,7 +19,46 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  # All admin, website and API tests must pass — otherwise nothing is deployed
+  tests:
+    runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: homecare_test
+        ports: ["3306:3306"]
+        options: >-
+          --health-cmd="mysqladmin ping -proot"
+          --health-interval=5s --health-timeout=5s --health-retries=20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.3"
+          extensions: mbstring, intl, pdo_mysql, pdo_sqlite, fileinfo, zip, gd
+          tools: composer:v2
+          coverage: none
+
+      - name: Install PHP packages (with test tools)
+        working-directory: backend
+        run: composer install --no-interaction --no-progress --prefer-dist
+
+      - name: Run tests (MySQL, like the live site)
+        working-directory: backend
+        env:
+          DB_CONNECTION: mysql
+          DB_HOST: 127.0.0.1
+          DB_PORT: 3306
+          DB_DATABASE: homecare_test
+          DB_USERNAME: root
+          DB_PASSWORD: root
+        run: php vendor/bin/phpunit
+
   build:
+    needs: tests
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

@@ -19,6 +19,8 @@
     </source>
     <php>
         <env name="APP_ENV" value="testing"/>
+        <!-- test-only key (CI has no .env); the live site uses its own key -->
+        <env name="APP_KEY" value="base64:pl/CHTOw9wVXK018V2hmsq/6fkYpzH0nqnD2PZ3Q1wQ="/>
         <env name="APP_MAINTENANCE_DRIVER" value="file"/>
         <env name="BCRYPT_ROUNDS" value="4"/>
         <env name="BROADCAST_CONNECTION" value="null"/>
